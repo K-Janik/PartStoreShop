@@ -1,7 +1,4 @@
-package pl.example.PartStoreShop.api;
-
-import pl.example.PartStoreShop.model.Part;
-import pl.example.PartStoreShop.model.Worker;
+package pl.example.PartStoreShop.model;
 
 public class Order {
     private final double orderid;
@@ -31,4 +28,5 @@ public class Order {
     public int getQuantity() {
         return quantity;
     }
+}
 }
