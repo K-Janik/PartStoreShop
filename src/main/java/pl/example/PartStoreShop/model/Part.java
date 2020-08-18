@@ -6,13 +6,11 @@ public class Part {
 
     private final UUID partnr;
     private final String partname;
-    int quantity;
     double price;
 
-    public Part(UUID partnr, String partname, int quantity, double price) {
+    public Part(UUID partnr, String partname, double price) {
         this.partnr = partnr;
         this.partname = partname;
-        this.quantity = quantity;
         this.price = price;
     }
 
@@ -22,14 +20,6 @@ public class Part {
 
     public String getPartname() {
         return partname;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 
     public double getPrice() {
