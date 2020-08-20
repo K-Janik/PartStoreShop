@@ -1,4 +1,4 @@
-package pl.example.PartStoreShop.model;
+/*package pl.example.PartStoreShop.model;
 
 public class Order {
     private final double orderid;
@@ -30,3 +30,4 @@ public class Order {
     }
 }
 }
+*/

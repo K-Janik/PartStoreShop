@@ -9,16 +9,18 @@ import java.util.UUID;
 public interface WorkerDao {
     int insertWorker(UUID id, Worker worker);
 
-    default int isertWorker(Worker worker) {
+    default int insertWorker(Worker worker) {
         UUID id = UUID.randomUUID();
         return insertWorker(id, worker);
     }
 
-    List<Worker> selectAllWorkers();
+/*    List<Worker> selectAllWorkers();
 
     Optional<Worker> selectWorkerById(UUID id);
 
     int deleteWorkerById(UUID id);
 
     int updateWorkerById(UUID id, Worker worker);
+
+ */
 }

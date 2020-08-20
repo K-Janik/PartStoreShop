@@ -1,5 +1,7 @@
 package pl.example.PartStoreShop.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.UUID;
 
 public class Part {
@@ -8,7 +10,9 @@ public class Part {
     private final String partname;
     double price;
 
-    public Part(UUID partnr, String partname, double price) {
+    public Part(@JsonProperty("partnr") UUID partnr,
+                @JsonProperty("partname") String partname,
+                @JsonProperty("price") double price) {
         this.partnr = partnr;
         this.partname = partname;
         this.price = price;

@@ -1,5 +1,7 @@
 package pl.example.PartStoreShop.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.UUID;
 
 public class Worker {
@@ -7,7 +9,8 @@ public class Worker {
 
     private final String name;
 
-    public Worker(UUID id, String name) {
+    public Worker(@JsonProperty("id") UUID id,
+                  @JsonProperty("name") String name) {
         this.id = id;
         this.name = name;
     }
