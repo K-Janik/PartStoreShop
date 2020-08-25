@@ -14,7 +14,7 @@ public interface PartDao {
         return insertPart(partid, part);
     }
 
-/*    List<Part> selectAllParts();
+    List<Part> selectAllParts();
 
     Optional<Part> selectPartById(UUID partid);
 
@@ -22,5 +22,5 @@ public interface PartDao {
 
     int updtePartById(UUID partid, Part part);
 
- */
+
 }

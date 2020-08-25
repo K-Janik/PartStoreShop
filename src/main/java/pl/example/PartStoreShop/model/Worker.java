@@ -2,11 +2,13 @@ package pl.example.PartStoreShop.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.validation.constraints.NotBlank;
 import java.util.UUID;
 
 public class Worker {
     private final UUID id;
 
+    @NotBlank
     private final String name;
 
     public Worker(@JsonProperty("id") UUID id,

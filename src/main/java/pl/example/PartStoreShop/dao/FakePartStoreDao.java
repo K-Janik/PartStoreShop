@@ -6,6 +6,7 @@ import pl.example.PartStoreShop.model.Worker;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository("fakeDao")
@@ -21,8 +22,81 @@ public class FakePartStoreDao implements PartDao,WorkerDao {
     }
 
     @Override
+    public List<Part> selectAllParts() {
+        return PartDB;
+    }
+
+    @Override
+    public Optional<Part> selectPartById(UUID partid) {
+        return PartDB.stream()
+                .filter(part -> part.getPartnr().equals(partid))
+                .findFirst();
+    }
+
+    @Override
+    public int deletePartByID(UUID partid) {
+        Optional<Part> partMaybe = selectPartById(partid);
+        if (partMaybe.isEmpty()) {
+            return 0;
+        }
+        PartDB.remove(partMaybe.get());
+        return 1;
+    }
+
+    @Override
+    public int updtePartById(UUID partid, Part update) {
+        return selectPartById(partid)
+                .map(part -> {
+                    int indexOfPartToUpdate = PartDB.indexOf(part);
+                    if (indexOfPartToUpdate >= 0) {
+                        PartDB.set(indexOfPartToUpdate, new Part(partid, update.getPartname(), update.getPrice()));
+                        return 1;
+                    }
+                    return 0;
+                })
+                .orElse(0);
+    }
+
+    @Override
     public int insertWorker(UUID id, Worker worker) {
         WorkerDB.add(new Worker(id, worker.getName()));
         return 1;
     }
+
+    @Override
+    public List<Worker> selectAllWorkers() {
+        return WorkerDB;
+    }
+
+    @Override
+    public Optional<Worker> selectWorkerById(UUID id) {
+        return WorkerDB.stream()
+                .filter(worker -> worker.getId().equals(id))
+                .findFirst();
+    }
+
+    @Override
+    public int deleteWorkerById(UUID id) {
+        Optional<Worker> workerMaybe = selectWorkerById(id);
+        if (workerMaybe.isEmpty()) {
+            return 0;
+        }
+        WorkerDB.remove(workerMaybe.get());
+        return 1;
+    }
+
+    @Override
+    public int updateWorkerById(UUID id, Worker update) {
+        return selectWorkerById(id)
+                .map(worker -> {
+                    int indexOfWorkerToUpdate = WorkerDB.indexOf(worker);
+                    if (indexOfWorkerToUpdate >= 0) {
+                        WorkerDB.set(indexOfWorkerToUpdate, new Worker(id, update.getName()));
+                        return 1;
+                    }
+                    return 0;
+                })
+                .orElse(0);
+    }
 }
+

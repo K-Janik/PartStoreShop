@@ -14,7 +14,7 @@ public interface WorkerDao {
         return insertWorker(id, worker);
     }
 
-/*    List<Worker> selectAllWorkers();
+    List<Worker> selectAllWorkers();
 
     Optional<Worker> selectWorkerById(UUID id);
 
@@ -22,5 +22,5 @@ public interface WorkerDao {
 
     int updateWorkerById(UUID id, Worker worker);
 
- */
+
 }

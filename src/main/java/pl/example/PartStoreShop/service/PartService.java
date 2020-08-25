@@ -6,6 +6,10 @@ import org.springframework.stereotype.Service;
 import pl.example.PartStoreShop.dao.PartDao;
 import pl.example.PartStoreShop.model.Part;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
 @Service
 public class PartService {
 
@@ -18,6 +22,22 @@ public class PartService {
 
     public int addPart(Part part) {
         return partDao.insertPart(part);
+    }
+
+    public List<Part> getAllParts() {
+        return partDao.selectAllParts();
+    }
+
+    public Optional<Part> getPartById(UUID partnr) {
+        return partDao.selectPartById(partnr);
+    }
+
+    public int deletePart(UUID partnr) {
+        return partDao.deletePartByID(partnr);
+    }
+
+    public int updatePart(UUID partnr, Part newPart) {
+        return partDao.updtePartById(partnr, newPart);
     }
 
 }

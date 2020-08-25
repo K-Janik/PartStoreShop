@@ -6,6 +6,9 @@ import org.springframework.stereotype.Service;
 import pl.example.PartStoreShop.dao.WorkerDao;
 import pl.example.PartStoreShop.model.Worker;
 
+import java.util.List;
+import java.util.UUID;
+
 @Service
 public class WorkerService {
 
@@ -18,5 +21,17 @@ public class WorkerService {
 
     public int addWorker(Worker worker) {
         return workerDao.insertWorker(worker);
+    }
+
+    public List<Worker> getAllWorkers() {
+        return workerDao.selectAllWorkers();
+    }
+
+    public int deleteWorker(UUID id) {
+        return workerDao.deleteWorkerById(id);
+    }
+
+    public int updateWorker(UUID id, Worker newWorker) {
+        return workerDao.updateWorkerById(id, newWorker);
     }
 }
