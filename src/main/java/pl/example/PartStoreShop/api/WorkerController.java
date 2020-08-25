@@ -22,7 +22,7 @@ public class WorkerController {
     }
 
     @PostMapping
-    public void addWorker(@RequestBody Worker worker) {
+    public void addWorker(@Valid @NonNull @RequestBody Worker worker) {
         workerService.addWorker(worker);
     }
 

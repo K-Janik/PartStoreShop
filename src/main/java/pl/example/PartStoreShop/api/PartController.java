@@ -22,7 +22,7 @@ public class PartController {
     }
 
     @PostMapping
-    public void addPart(@RequestBody Part part) {
+    public void addPart(@Valid @NonNull @RequestBody Part part) {
         partService.addPart(part);
     }
 
