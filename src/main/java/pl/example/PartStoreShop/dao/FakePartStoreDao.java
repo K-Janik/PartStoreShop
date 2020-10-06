@@ -1,6 +1,7 @@
 package pl.example.PartStoreShop.dao;
 
 import org.springframework.stereotype.Repository;
+import pl.example.PartStoreShop.model.Order;
 import pl.example.PartStoreShop.model.Part;
 import pl.example.PartStoreShop.model.Worker;
 
@@ -10,10 +11,11 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository("fakeDao")
-public class FakePartStoreDao implements PartDao,WorkerDao {
+public class FakePartStoreDao implements PartDao,WorkerDao,OrderDao {
 
     private static List<Part> PartDB = new ArrayList<>();
     private static List<Worker> WorkerDB = new ArrayList<>();
+    private static List<Order> OrderDB = new ArrayList<>();
 
     @Override
     public int insertPart(UUID partnr, Part part) {
@@ -44,7 +46,7 @@ public class FakePartStoreDao implements PartDao,WorkerDao {
     }
 
     @Override
-    public int updtePartById(UUID partid, Part update) {
+    public int updatePartById(UUID partid, Part update) {
         return selectPartById(partid)
                 .map(part -> {
                     int indexOfPartToUpdate = PartDB.indexOf(part);
@@ -97,6 +99,37 @@ public class FakePartStoreDao implements PartDao,WorkerDao {
                     return 0;
                 })
                 .orElse(0);
+    }
+
+    @Override
+    public int insertOrder(UUID orderid, Order order) {
+        OrderDB.add(new Order(orderid, order.getWorker(), order.getPart(), order.getQuantity()));
+        return 1;
+    }
+
+    @Override
+    public int insertOrder(Order order) {
+        return 0;
+    }
+
+    @Override
+    public List<Order> selectAllOrders() {
+        return null;
+    }
+
+    @Override
+    public Optional<Order> selectOrderById(UUID orderid) {
+        return Optional.empty();
+    }
+
+    @Override
+    public int deleteOrderById(UUID orderid) {
+        return 0;
+    }
+
+    @Override
+    public int updateOrderById(UUID orderid, Order order) {
+        return 0;
     }
 }
 

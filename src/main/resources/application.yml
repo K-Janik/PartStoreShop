@@ -1,0 +1,9 @@
+app:
+  datasource:
+    jdbc-url: jdbc:postgresql://localhost:5432/PartStoreShop
+    username: postgres
+    password: MojeHaslo
+    pool-size: 30
+spring:
+  datasource:
+    initialization-mode: never

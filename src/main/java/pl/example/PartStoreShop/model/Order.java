@@ -1,19 +1,23 @@
-/*package pl.example.PartStoreShop.model;
+package pl.example.PartStoreShop.model;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.UUID;
 
 public class Order {
-    private final double orderid;
+    private final UUID orderid;
     private final Worker worker;
     private final Part part;
     private final int quantity;
 
-    public Order(double orderid, Worker worker, Part part, int quantity) {
+    public Order(@JsonProperty("id") UUID orderid, @JsonProperty("name") Worker worker, @JsonProperty("partname") Part part, @JsonProperty("quantity") int quantity) {
         this.orderid = orderid;
         this.worker = worker;
         this.part = part;
         this.quantity = quantity;
     }
 
-    public double getOrderid() {
+    public UUID getOrderid() {
         return orderid;
     }
 
@@ -29,5 +33,4 @@ public class Order {
         return quantity;
     }
 }
-}
-*/
+

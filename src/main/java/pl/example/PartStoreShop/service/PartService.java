@@ -16,7 +16,7 @@ public class PartService {
     private final PartDao partDao;
 
     @Autowired
-    public PartService(@Qualifier("fakeDao") PartDao partDao) {
+    public PartService(@Qualifier("PartStoreShop") PartDao partDao) {
         this.partDao = partDao;
     }
 
@@ -37,7 +37,7 @@ public class PartService {
     }
 
     public int updatePart(UUID partnr, Part newPart) {
-        return partDao.updtePartById(partnr, newPart);
+        return partDao.updatePartById(partnr, newPart);
     }
 
 }

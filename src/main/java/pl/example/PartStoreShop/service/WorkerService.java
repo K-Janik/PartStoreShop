@@ -15,7 +15,7 @@ public class WorkerService {
     private final WorkerDao workerDao;
 
     @Autowired
-    public WorkerService(@Qualifier("fakeDao") WorkerDao workerDao) {
+    public WorkerService(@Qualifier("PartStoreShop") WorkerDao workerDao) {
         this.workerDao = workerDao;
     }
 

@@ -20,7 +20,7 @@ public interface PartDao {
 
     int deletePartByID(UUID partid);
 
-    int updtePartById(UUID partid, Part part);
+    int updatePartById(UUID partid, Part part);
 
 
 }
