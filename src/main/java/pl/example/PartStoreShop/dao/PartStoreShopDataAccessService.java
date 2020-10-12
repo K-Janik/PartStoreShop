@@ -115,7 +115,8 @@ public class PartStoreShopDataAccessService implements PartDao,WorkerDao, OrderD
 
     @Override
     public int insertOrder(UUID orderid, Order order) {
-        final String sql = "INSERT INTO partorder VALUES(?,?,?,?,?,?,?)";
+        final String sql = "INSERT INTO partorder(order_id,part_id,part_price,part_name,order_quantity,worker_id,worker_name) VALUES(?,nr,price,?,?,id,?)" +
+                "SELECT ";
         return jdbcTemplate.update(sql, new Object[]{
                 orderid,
                 order.getPart(),
