@@ -1,10 +1,12 @@
 package pl.example.PartStoreShop.api;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
+import org.springframework.web.bind.annotation.*;
 import pl.example.PartStoreShop.model.Order;
 import pl.example.PartStoreShop.service.OrderService;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -15,28 +17,34 @@ public class OrderController {
 
     private final OrderService orderService;
 
+    @Autowired
     public OrderController(OrderService orderService) {
         this.orderService = orderService;
     }
 
-    public void addOrder(Order order) {
+    @PostMapping
+    public void addOrder(@Valid @NonNull @RequestBody Order order) {
         orderService.addOrder(order);
     }
 
+    @GetMapping
     public List<Order> getAllOrders() {
         return orderService.getAllOrders();
     }
 
-    public Order getOrderById(UUID orderid) {
+    @GetMapping(path="{id}")
+    public Order getOrderById(@PathVariable("id") UUID orderid) {
         return orderService.getOrderById(orderid)
                 .orElseThrow(() -> new IllegalArgumentException("Order is not in Database"));
     }
 
-    public void deleteOrder(UUID orderid) {
+    @DeleteMapping(path="{id}")
+    public void deleteOrder(@PathVariable("id") UUID orderid) {
         orderService.deleteOrder(orderid);
     }
 
-    public void updateOrder(UUID orderid, Order orderToUpdate) {
+    @PutMapping(path="{id}")
+    public void updateOrder(@PathVariable("id") UUID orderid, @Valid@NonNull@RequestBody Order orderToUpdate) {
         orderService.updateOrder(orderid, orderToUpdate);
     }
 
