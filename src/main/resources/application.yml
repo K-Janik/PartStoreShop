@@ -6,4 +6,4 @@ app:
     pool-size: 30
 spring:
   datasource:
-    initialization-mode: always
+    initialization-mode: never
