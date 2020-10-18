@@ -11,10 +11,10 @@ CREATE TABLE Worker(
 
 CREATE TABLE PartOrder(
     Order_Id UUID NOT NULL PRIMARY KEY,
-    Part_Id VARCHAR(100),
-    Part_price NUMERIC(8,2),
+    Part_Id VARCHAR(100) NOT NULL,
+    Part_price NUMERIC(8,2) NOT NULL,
     Part_name VARCHAR(100) NOT NULL,
     Order_quantity NUMERIC(2,0) NOT NULL,
-    Worker_Id UUID,
+    Worker_Id UUID NOT NULL,
     Worker_name VARCHAR(100) NOT NULL
     );
