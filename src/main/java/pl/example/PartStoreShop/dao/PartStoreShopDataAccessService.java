@@ -129,23 +129,43 @@ public class PartStoreShopDataAccessService implements PartDao,WorkerDao, OrderD
                 order.getPart(),
                 order.getPart()
         });
-
-
     }
 
     @Override
     public List<Order> selectAllOrders() {
-        return null;
+        final String sql = "SELECT * FROM partorder";
+        return jdbcTemplate.query(sql, (resultSet, i) -> {
+           UUID order_id = UUID.fromString(resultSet.getString("order_id"));
+           UUID part_id = UUID.fromString(resultSet.getString("part_id"));
+           UUID worker_id = UUID.fromString(resultSet.getString("worker_id"));
+           double part_price = resultSet.getDouble("part_price");
+           String part_name=resultSet.getString("part_name");
+           int order_quantity=resultSet.getInt("order_quantity");
+           String worker_name=resultSet.getString("worker_name");
+            return new Order(order_id,worker_name,part_name,order_quantity);
+        });
     }
 
     @Override
     public Optional<Order> selectOrderById(UUID orderid) {
-        return Optional.empty();
+        final String sql = "SELECT * FROM partorder WHERE order_id=?";
+        Order order = jdbcTemplate.queryForObject(
+                sql,
+                new Object[] {orderid},
+                (resultSet, i) -> {
+                    UUID orderID = UUID.fromString(resultSet.getString("order_id"));
+                    String partName = resultSet.getString("part_name");
+                    int orderQuantity = resultSet.getInt("order_quantity");
+                    String workerName = resultSet.getString("worker_name");
+                    return new Order(orderID, workerName,partName,orderQuantity);
+                });
+        return Optional.ofNullable(order);
     }
 
     @Override
     public int deleteOrderById(UUID orderid) {
-        return 0;
+        final String sql = "DELETE FROM partorder WHERE order_id=?";
+        return jdbcTemplate.update(sql, orderid);
     }
 
     @Override
