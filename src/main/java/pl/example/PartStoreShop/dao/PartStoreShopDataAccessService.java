@@ -133,8 +133,10 @@ public class PartStoreShopDataAccessService implements PartDao,WorkerDao, OrderD
 
     @Override
     public List<Order> selectAllOrders() {
-        final String sql = "SELECT * FROM partorder";
-        return jdbcTemplate.query(sql, (resultSet, i) -> {
+        final String sqlPartOrder = "SELECT * FROM partorder";
+        final String sqlWorker = "SELECT worker_id FROM partorder";
+        final String sqlPart = "SELECT part_id, part_price FROM partorder";
+        return jdbcTemplate.query(sqlPartOrder, (resultSet, i) -> {
            UUID order_id = UUID.fromString(resultSet.getString("order_id"));
            UUID part_id = UUID.fromString(resultSet.getString("part_id"));
            UUID worker_id = UUID.fromString(resultSet.getString("worker_id"));
@@ -142,7 +144,7 @@ public class PartStoreShopDataAccessService implements PartDao,WorkerDao, OrderD
            String part_name=resultSet.getString("part_name");
            int order_quantity=resultSet.getInt("order_quantity");
            String worker_name=resultSet.getString("worker_name");
-            return new Order(order_id,worker_name,part_name,order_quantity);
+           return new Order(order_id,worker_name,part_name,order_quantity);
         });
     }
 
