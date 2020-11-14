@@ -103,7 +103,7 @@ public class FakePartStoreDao implements PartDao,WorkerDao,OrderDao {
 
     @Override
     public int insertOrder(UUID orderid, Order order) {
-        OrderDB.add(new Order(orderid, order.getWorker(), order.getPart(), order.getQuantity()));
+        OrderDB.add(new Order(orderid, order.getWorkerId(), order.getPartId(), order.getQuantity()));
         return 1;
     }
 

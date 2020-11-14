@@ -114,20 +114,20 @@ public class PartStoreShopDataAccessService implements PartDao,WorkerDao, OrderD
     }
 
     @Override
-    public int insertOrder(UUID orderid, Order order) {
+    public int insertOrder(UUID orderId, Order order) {
         final String insert_sql = "INSERT INTO partorder(order_id,part_name,order_quantity,worker_name,worker_id,part_id,part_price) VALUES (" +
                 "?,?,?,?," +
                 "(SELECT id FROM worker WHERE name=?)," +
                 "(SELECT nr FROM part WHERE name=?)," +
                 "(SELECT price FROM part WHERE name=?))";
         return jdbcTemplate.update(insert_sql, new Object[]{
-                orderid,
-                order.getPart(),
+                orderId,
+                order.getPartId(),
                 order.getQuantity(),
-                order.getWorker(),
-                order.getWorker(),
-                order.getPart(),
-                order.getPart()
+                order.getWorkerId(),
+                order.getWorkerId(),
+                order.getPartId(),
+                order.getPartId()
         });
     }
 
@@ -144,7 +144,7 @@ public class PartStoreShopDataAccessService implements PartDao,WorkerDao, OrderD
            String part_name=resultSet.getString("part_name");
            int order_quantity=resultSet.getInt("order_quantity");
            String worker_name=resultSet.getString("worker_name");
-           return new Order(order_id,worker_name,part_name,order_quantity);
+           return new Order(order_id,worker_id,part_id,order_quantity);
         });
     }
 
@@ -155,11 +155,11 @@ public class PartStoreShopDataAccessService implements PartDao,WorkerDao, OrderD
                 sql,
                 new Object[] {orderid},
                 (resultSet, i) -> {
-                    UUID orderID = UUID.fromString(resultSet.getString("order_id"));
-                    String partName = resultSet.getString("part_name");
+                    UUID orderId = UUID.fromString(resultSet.getString("order_id"));
+                    UUID partId = UUID.fromString(resultSet.getString("part_name"));
                     int orderQuantity = resultSet.getInt("order_quantity");
-                    String workerName = resultSet.getString("worker_name");
-                    return new Order(orderID, workerName,partName,orderQuantity);
+                    UUID workerId = UUID.fromString(resultSet.getString("worker_name"));
+                    return new Order(orderId, workerId,partId,orderQuantity);
                 });
         return Optional.ofNullable(order);
     }

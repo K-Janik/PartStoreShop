@@ -5,28 +5,28 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.UUID;
 
 public class Order {
-    private final UUID orderid;
-    private final String worker;
-    private final String part;
+    private final UUID orderId;
+    private final UUID workerId;
+    private final UUID partId;
     private final int quantity;
 
-    public Order(@JsonProperty("id") UUID orderid, @JsonProperty("name") String worker, @JsonProperty("partname") String part, @JsonProperty("quantity") int quantity) {
-        this.orderid = orderid;
-        this.worker = worker;
-        this.part = part;
+    public Order(@JsonProperty("orderId") UUID orderId, @JsonProperty("workerId") UUID workerId, @JsonProperty("partId") UUID partId, @JsonProperty("quantity") int quantity) {
+        this.orderId = orderId;
+        this.workerId = workerId;
+        this.partId = partId;
         this.quantity = quantity;
     }
 
-    public UUID getOrderid() {
-        return orderid;
+    public UUID getOrderId() {
+        return orderId;
     }
 
-    public String getWorker() {
-        return worker;
+    public UUID getWorkerId() {
+        return workerId;
     }
 
-    public String getPart() {
-        return part;
+    public UUID getPartId() {
+        return partId;
     }
 
     public int getQuantity() {
